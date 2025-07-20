@@ -1,0 +1,58 @@
+<h1>Lista de prendas</h1>
+<div class="container-fluid">
+    <div class="d-flex">
+        <table class="table table-hover w-100 text-center">
+            <thead>
+                <tr>
+                    <th style="min-width: 1px;">Nombre</th>
+                    <th style="min-width: 1px;">Tipo</th>
+                    <th style="min-width: 1px;">Talle</th>
+                    <th style="min-width: 1px;">Precio</th>
+                    <th>Stock</th>
+                    <th>Imagen</th>                    
+                    <th style="min-width: 125px;">Cantidad</th>
+                    <th>Comprar</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (cloth of clothes; track cloth.name) {
+                    <tr [ngClass]="{'clearance' : cloth.clearance}">
+                        <td>{{cloth.name | uppercase}}</td>
+                        <td>{{cloth.type | uppercase}}</td>
+                        <td>{{cloth.waist | uppercase}}</td>
+                        <td>{{cloth.price | currency:'USD':'symbol':'1.0-0':'en-US'}}</td>
+                        @if (cloth.stock > 0) {
+                            <td>{{cloth.stock}}</td>
+                        }@else {
+                            <td><span class="badge bg-warning text-dark">sin stock</span></td>
+                        }
+
+                        <td>
+                           <img [src]="cloth.image" alt="{{cloth.name}}" class="img-fluid"
+                           style="width: 900px; height: 200px; object-fit: cover;" >
+                        </td>
+                        <td><!-- cloth de clothe-list component y el segundo es el de for ^-->
+                            <app-input-number (maxReached)="maxReached($event)" [(quantity)]="cloth.quantity" [max]="cloth.stock" *ngIf="cloth.stock"></app-input-number>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-success" (click)="addCart(cloth)">Agregar al carrito</button>
+                        </td>
+                    </tr>
+                } @empty {
+                    <tr>
+                    </tr>
+                }
+                <!-- Forma anterior
+                <tr *ngFor="let cloth of clothes">
+                    <td>{{cloth.name}}</td>
+                    <td>{{cloth.type}}</td>
+                    <td>{{cloth.price}}</td>
+                    <td><span *ngIf="cloth.stock==0" class="alert alert-warning" role="alert">sin stock</span></td>
+                    <td><img [src]="cloth.image" [alt]="cloth.name"></td>
+                </tr>
+                -->
+            </tbody>
+        </table>
+
+    </div>
+</div>

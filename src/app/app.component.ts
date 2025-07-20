@@ -7,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'jhDeportivo';
+  title = 'Indumentaria JH deportivo';
+  scrollToTop(event: Event): void {
+  event.preventDefault(); // evita que el enlace recargue la página
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+}
+
