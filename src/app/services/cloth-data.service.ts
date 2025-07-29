@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Clothes } from '../clothes-list/Clothes';
 
-const URL = 'http://localhost:3000/clothes';
+const URL = 'https://my-json-server.typicode.com/joacohevia/Api-Angular/clothes';
+
 @Injectable({
   providedIn: 'root'
 })
